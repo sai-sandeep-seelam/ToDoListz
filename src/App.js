@@ -14,6 +14,9 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+  useEffect(() => {
+  document.body.className = darkMode ? "dark" : "light";
+}, [darkMode]);
 
   const addTask = (text) => {
     setTasks([...tasks, { id: Date.now(), text, completed: false }]);
