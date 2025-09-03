@@ -1,0 +1,287 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #121212;
+  color: #eaeaea;
+  transition: background 0.3s, color 0.3s;
+}
+
+.app {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.3s, color 0.3s;
+}
+
+.app.dark {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
+
+.app.light {
+  background: #ffffff;
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+.toggle-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  border-radius: 45%;
+  border: 1px solid #555;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.08);
+}
+
+.task-form {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.task-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.app.light .task-form input {
+  background: #f5f5f5;
+  color: #000;
+}
+
+.task-form button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.task-form button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filters button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.filters button.active {
+  background: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.filters button:hover {
+  transform: scale(1.05);
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #333;
+  transition: background 0.3s;
+}
+
+.task:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.task.completed span {
+  text-decoration: line-through;
+  opacity: 0.6;
+  
+}
+
+/* Left section with checkbox */
+.task .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  appearance: none; 
+  border: 2px solid #555;
+  border-radius: 4px;
+  position: relative;
+  transition: background 0.3s, border 0.3s;
+  background: transparent;
+}
+
+.task input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.task input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+
+
+.actions button {
+  margin-left: 5px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.edit-btn {
+  background: #ffa500;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #cc8400;
+  transform: scale(1.05);
+}
+
+.save-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.save-btn:hover {
+  background: #1e7e34;
+  transform: scale(1.05);
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #a71d2a;
+  transform: scale(1.05);
+}
+
+
+.edit-input {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.app.light .edit-input {
+  background: #f5f5f5;
+  color: #000;
+}
+
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* for responsive */
+@media (max-width: 600px) {
+  .app {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  .toggle-btn {
+    font-size: 1.2rem;
+  }
+
+  .task-form input {
+    font-size: 0.9rem;
+  }
+
+  .task-form button {
+    font-size: 0.9rem;
+  }
+  .task {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 8px;
+  }
+
+  .task .left {
+    width: 100%;
+  }
+
+  .task .actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-left: 0;
+  }
+
+  .edit-input {
+    width: 100%;
+  }
+}
