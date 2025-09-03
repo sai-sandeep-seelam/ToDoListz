@@ -11,30 +11,24 @@ export default function App() {
 
   const [filter, setFilter] = useState("all");
 
-  // Initialize theme from localStorage (fallback to system preference)
   const [darkMode, setDarkMode] = useState(() => {
     try {
-      const saved = localStorage.getItem("todo-theme"); // 'dark' | 'light' | null
+      const saved = localStorage.getItem("todo-theme");
       if (saved === "dark") return true;
       if (saved === "light") return false;
-      // fallback to system pref
       return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     } catch (e) {
       return true;
     }
   });
 
-  // persist tasks
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  // apply theme class to body and persist theme
   useEffect(() => {
-    // keep both classes correct on body
     document.body.classList.toggle("dark", darkMode);
     document.body.classList.toggle("light", !darkMode);
-
     localStorage.setItem("todo-theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
@@ -46,7 +40,6 @@ export default function App() {
     const updated = tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
     );
-    // sort: incomplete first, completed last
     updated.sort((a, b) => a.completed - b.completed);
     setTasks(updated);
   };
@@ -57,7 +50,6 @@ export default function App() {
 
   const editTask = (id, newText) => {
     const updated = tasks.map((task) => (task.id === id ? { ...task, text: newText } : task));
-    // maintain sorting
     updated.sort((a, b) => a.completed - b.completed);
     setTasks(updated);
   };
@@ -101,17 +93,28 @@ export default function App() {
         </button>
       </div>
 
-      <ul className="task-list">
-        {filteredTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            toggleTask={toggleTask}
-            deleteTask={deleteTask}
-            editTask={editTask}
-          />
-        ))}
-      </ul>
+      {filteredTasks.length === 0 ? (
+        <div className="empty">
+          <div className="empty-inner" role="status" aria-live="polite">
+            <div className="empty-emoji" aria-hidden>🗒️</div>
+            <div className="empty-text">
+              <strong>No tasks yet</strong>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <ul className="task-list">
+          {filteredTasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              task={task}
+              toggleTask={toggleTask}
+              deleteTask={deleteTask}
+              editTask={editTask}
+            />
+          ))}
+        </ul>
+      )}
 
       <footer>
         <p>ToDoListz - Hub for listing tasks.</p>
